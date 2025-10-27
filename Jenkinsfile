@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        JAR_NAME = "jenkinsdemo-1.jar" // ✅ update to match actual JAR name
+        JAR_NAME = "jenkinsdemo-1.0.0.jar" // ✅ update to match actual JAR name
     }
 
     stages {
