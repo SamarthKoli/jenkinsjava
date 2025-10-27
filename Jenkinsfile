@@ -1,43 +1,44 @@
-pipeline{
-    tools{
-        jdk:21
-        maven 'jenkins-maven'
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JDK21'            // ✅ Change this to match your Jenkins tool name
+        maven 'jenkins-maven'  // ✅ Ensure this matches Global Tool Config name
     }
 
-    environment{
-       JAR_NAME="app.jar"
+    environment {
+        JAR_NAME = "app.jar" // ✅ update to match actual JAR name
     }
 
-    stages{
+    stages {
 
-        stage('Checkout'){
-            steps{
-                git branch : 'Main',
-                url:'https://github.com/SamarthKoli/jenkinsjava.git'
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/SamarthKoli/jenkinsjava.git'
             }
         }
 
-        stage('Build'){
-            steps{
+        stage('Build') {
+            steps {
                 sh "mvn clean package -DskipTests"
             }
         }
 
-        stage('Execute Application'){
-            steps{
-                echo "App is running"
+        stage('Execute Application') {
+            steps {
+                echo "🚀 Running Java Application..."
                 sh "java -jar target/${JAR_NAME}"
             }
         }
     }
 
-    post{
-        sucess{
-            echo "Java app executed"
+    post {
+        success {             // ✅ Correct spelling
+            echo "✅ Java Application executed successfully!"
         }
-        failure{
-            echo "Error ocurred"
+        failure {
+            echo "❌ Build Failed — Check logs!"
         }
-        
-     }
+    }
 }
