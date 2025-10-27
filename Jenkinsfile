@@ -21,14 +21,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "mvn clean package -DskipTests"
+                bat "mvn clean package -DskipTests"
             }
         }
 
         stage('Execute Application') {
             steps {
                 echo "🚀 Running Java Application..."
-                sh "java -jar target/${JAR_NAME}"
+                bat "java -jar target/${JAR_NAME}"
             }
         }
     }
